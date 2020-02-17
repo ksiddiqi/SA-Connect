@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Lab Task 7 - Hub and Spoke Connetivity - Cisco Connect - SDWAN Hands on Lab</title>
+  <title>Lab Task 6 - Hub and Spoke Connetivity - Cisco Connect - SDWAN Hands on Lab</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Lab Task 7 - Hub and Spoke Connetivity";
+    var mkdocs_page_name = "Lab Task 6 - Hub and Spoke Connetivity";
     var mkdocs_page_input_path = "Task7-HubnSpoke_VPN20.md";
     var mkdocs_page_url = null;
   </script>
@@ -83,14 +83,9 @@
     <a class="" href="../Task5-VPN creations/">Lab Task 5 - VPN Creation</a>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../Task6-OSPF_service/">Lab Task 6 - OSPF Peering</a>
-	    </li>
-          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Lab Task 7 - Hub and Spoke Connetivity</a>
+    <a class="current" href="./">Lab Task 6 - Hub and Spoke Connetivity</a>
     <ul class="subnav">
             
     <li class="toctree-l2"><a href="#task-7-creating-hub-and-spoke-topoloy">Task 7 - Creating Hub and Spoke Topoloy</a></li>
@@ -109,7 +104,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Task8-Additional_PHB/">Lab Task 8 - Partial Hub and Spoke</a>
+    <a class="" href="../Task8-Additional_PHB/">Lab Task 7 - Partial Hub and Spoke</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task6-OSPF_service/">Lab Task 8 - OSPF Peering</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -139,7 +139,7 @@
     
       
     
-    <li>Lab Task 7 - Hub and Spoke Connetivity</li>
+    <li>Lab Task 6 - Hub and Spoke Connetivity</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -150,7 +150,7 @@
             <div class="section">
               
                 <h1 id="task-7-creating-hub-and-spoke-topoloy">Task 7 - Creating Hub and Spoke Topoloy</h1>
-<p>This task will walk you through the steps to create Hub and Spoke topology for all branches. For AWS we will block TLOC coming in from BR1 and BR2.</p>
+<p>This task will walk you through the steps to create Hub and Spoke topology for all branches. </p>
 <h2 id="step-1-verify-vedge-routes-for-vpn10-vpn20-and-vpn30">Step 1: Verify vEdge routes for VPN10, VPN20 and VPN30</h2>
 <p>In this step we will SSH to the vEdge in Branch1 and Branch2 and verify routing table showing all connectios are fully mesh.</p>
 <ul>
@@ -203,18 +203,6 @@
 <p><img alt="" src="../pics/t8a-showiproutevpn20-BR2.png" /></p>
 <p>Below is the output for DC-vEDGE</p>
 <p><img alt="" src="../pics/t8a-showiproutevpn20-DC.png" /></p>
-<table>
-<thead>
-<tr>
-<th><strong>Note:</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>You will notice that there no routes coming in from AWS-vEdges. This is because TLOCs are unreachable between branches and AWS. We will fix this towards the end of the this task.</td>
-</tr>
-</tbody>
-</table>
 <ul>
 <li>
 <p>Let's verify the same using <strong>vManage</strong></p>
@@ -375,7 +363,7 @@
 <p><img alt="" src="../pics/t8a-Add-DC-TLOC-1.png" /></p>
 <p>Enter Data-Center TLOC values for color <strong>private1</strong> and click <strong>Save</strong></p>
 <p><img alt="" src="../pics/t8a-Add-DC-TLOC-2.png" /></p>
-<p>Repeat the same step for Branch 1 and Branch 2 TLOCs, below is how the output will look like once you complete this task.</p>
+<p>Repeat the same step for Branch 1 and 2 TLOCs, below is how the output will look like once you complete this task.</p>
 <p><img alt="" src="../pics/t8a-TLOC-list.png" /></p>
 <ul>
 <li>For adding VPN List Select <strong>VPN</strong>, click <strong>New VPN List</strong>, enter the details as per below table then click <strong>Add</strong>.</li>
@@ -581,10 +569,10 @@ control-policy Hub-Spoke out
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Task8-Additional_PHB/" class="btn btn-neutral float-right" title="Lab Task 8 - Partial Hub and Spoke">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Task8-Additional_PHB/" class="btn btn-neutral float-right" title="Lab Task 7 - Partial Hub and Spoke">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Task6-OSPF_service/" class="btn btn-neutral" title="Lab Task 6 - OSPF Peering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Task5-VPN creations/" class="btn btn-neutral" title="Lab Task 5 - VPN Creation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -596,6 +584,7 @@ control-policy Hub-Spoke out
     
   </div>
 
+ 
 </footer>
       
         </div>
@@ -609,7 +598,7 @@ control-policy Hub-Spoke out
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Task6-OSPF_service/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Task5-VPN creations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../Task8-Additional_PHB/" style="color: #fcfcfc">Next &raquo;</a></span>
