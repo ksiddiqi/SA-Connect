@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lab Task 8 - Partial Hub and Spoke - Cisco Connect - SDWAN Hands on Lab</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lab Task 8 - Partial Hub and Spoke";
+    var mkdocs_page_input_path = "Task8-Additional_PHB.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Cisco Connect - SDWAN Hands on Lab</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Topology/">Topology</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task1-Connect/">Lab Task 1 - Remote Connection to Lab</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task2-Exploring Control Plane/">Lab Task 2 - Bring Up and Explore Control Plane</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task3-vEdge/">Lab Task 3 - Bring Up vEdges</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task4-Full-Mesh/">Lab Task 4 - Verify Full Mesh Connectivity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task5-VPN creations/">Lab Task 5 - VPN Creation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task6-OSPF_service/">Lab Task 6 - OSPF Peering</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task7-HubnSpoke_VPN20/">Lab Task 7 - Hub and Spoke Connetivity</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Lab Task 8 - Partial Hub and Spoke</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#task-8-additional-task-for-creating-partial-hub-and-spoke">Task 8 - Additional Task for creating Partial Hub and Spoke</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#step-1-open-vmanage-and-deactivate-existing-aar-pplicy">Step 1: Open vManage and Deactivate Existing AAR pplicy</a></li>
+        
+            <li><a class="toctree-l3" href="#step-2-creating-new-custom-topology">Step 2: Creating New Custom Topology</a></li>
+        
+            <li><a class="toctree-l3" href="#step-3-importing-new-custom-topology-to-main-policy">Step 3: Importing New Custom Topology to Main Policy</a></li>
+        
+            <li><a class="toctree-l3" href="#step-4-verification">Step 4: Verification</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task9-AAR/">Lab Task 9 - Application Aware Routing</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Cisco Connect - SDWAN Hands on Lab</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Lab Task 8 - Partial Hub and Spoke</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="task-8-additional-task-for-creating-partial-hub-and-spoke">Task 8 - Additional Task for creating Partial Hub and Spoke</h1>
+<p>In this task, you will create partial hub and spoke topology, where VPN 10 and 20 will be reachable via DC vEdge while VPN 30 is Fully mesh. We will re-use exsiting Hub-Spoke Topology that was created in Task 8 and change it accordingly.</p>
+<h2 id="step-1-open-vmanage-and-deactivate-existing-aar-pplicy">Step 1: Open vManage and Deactivate Existing AAR pplicy</h2>
+<ul>
+<li>Click <strong>Configuration&gt;Policy</strong> </li>
+</ul>
+<p><img alt="" src="../pics/t9-vmanage-policy.png" /></p>
+<ul>
+<li>
+<p>On the upper right hand, click <strong>Custom Options</strong> and select <strong>CLI Policy</strong></p>
+<p><img alt="" src="../pics/t9-CLI-Policy.png" /></p>
+</li>
+<li>
+<p>Select AAR-Policy and click <strong>...</strong> then select <strong>Deactivate</strong>,</p>
+<p><img alt="" src="../pics/t11-Deactivate.png" /></p>
+</li>
+<li>
+<p>Confirm deactivation by clicking <strong>Deactivate</strong> again</p>
+<p><img alt="" src="../pics/t11-Deactivate2.png" /></p>
+</li>
+</ul>
+<h2 id="step-2-creating-new-custom-topology">Step 2: Creating New Custom Topology</h2>
+<ul>
+<li>
+<p>Click <strong>Configuration&gt;Policy</strong> </p>
+</li>
+<li>
+<p>Create another customs CLI topology by clicking <strong>Custom Options</strong> &gt; <strong>Topology</strong></p>
+<p><img alt="" src="../pics/t11-Edit-Topology1.png" /></p>
+</li>
+<li>
+<p>Click <strong>...</strong> &gt; <strong>Copy</strong> next to <strong>Hub and Spoke</strong> policy</p>
+<p><img alt="" src="../pics/t11-Copy-topology1.png" /></p>
+</li>
+<li>
+<p>Enter new <strong>Topology Name</strong> and <strong>Description</strong></p>
+<p><strong>Policy Name</strong> <code>Partial-Hub-Spoke</code>
+<br/><strong>Description</strong> <code>Hub and Spoke for VPN 10, 20 while Full Mesh for VPN30</code></p>
+<p><img alt="" src="../pics/t11-Copy-topology2.png" /></p>
+</li>
+<li>
+<p>Edit <strong>Hub-Spoke Topology</strong> to create topology rules by selecting <strong>...</strong> &gt; <strong>Edit</strong> </p>
+<p><img alt="" src="../pics/t11-Edit-Topology2.png" /></p>
+</li>
+<li>
+<p>Edit the 1st Rule by clicking <strong>Pencil icon</strong></p>
+<p><img alt="" src="../pics/t11-Edit-Topology3.png" /></p>
+</li>
+<li>
+<p>Remove <strong>CL-Brach1</strong> from <strong>Site List</strong> and Add <strong>AllBranches</strong> </p>
+</li>
+<li>
+<p>Select <strong>VPN</strong> and click <strong>New VPN List</strong> to exclude <strong>VPN 30</strong></p>
+<p><img alt="" src="../pics/t11-Edit-Topology4.png" /></p>
+</li>
+<li>
+<p>Enter <strong>VPN List Name</strong> add <strong>VPNs 10,20</strong> and click <strong>Save</strong></p>
+<p><img alt="" src="../pics/t11-Edit-Topology5.png" /></p>
+</li>
+<li>
+<p>Select newly created VPN list <strong>VPN10-20</strong> and click <strong>Save Match And Actions</strong>, </p>
+</li>
+<li>
+<p>Delete the 2nd and 3rd Rule.</p>
+<p><img alt="" src="../pics/t11-Delete-rule.png" /></p>
+</li>
+<li>
+<p>Click <strong>Save Control Policy</strong></p>
+<p><img alt="" src="../pics/t11-Save-Topology-new.png" /></p>
+</li>
+</ul>
+<h2 id="step-3-importing-new-custom-topology-to-main-policy">Step 3: Importing New Custom Topology to Main Policy</h2>
+<ul>
+<li>
+<p>Click <strong>Centralized Policy</strong></p>
+<p><img alt="" src="../pics/t11-Import-Topology1.png" /></p>
+</li>
+<li>
+<p>Then on the next screen click <strong>Add Policy</strong> then click <strong>Next</strong></p>
+</li>
+<li>
+<p>Click <strong>Add Topology</strong> then select <strong>Import Existing Topology</strong></p>
+<p><img alt="" src="../pics/t11-Import-Topology-new.png" /></p>
+</li>
+<li>
+<p>On Policy Type select <strong>Custom Control (Route and TLOC</strong> and on <strong>Policy</strong> select the new created <strong>Partial-Hub-Spoke</strong> topology</p>
+<p><img alt="" src="../pics/t11-Import-Topology5.png" /></p>
+</li>
+<li>
+<p>Click <strong>Next</strong></p>
+<p><img alt="" src="../pics/t11-Import-Topology5ab.png" /></p>
+</li>
+<li>
+<p>Click <strong>Next</strong> again</p>
+<p><img alt="" src="../pics/t11-Import-Topology5abc.png" /></p>
+</li>
+<li>
+<p>On <strong>Policy Application</strong> enter new policy name description page click <strong>New Site List</strong></p>
+<p><img alt="" src="../pics/t11-Import-Topology6.png" /></p>
+</li>
+<li>
+<p>On <strong>Outbound Site List</strong> select <strong>AllBranches</strong> then click <strong>Add</strong></p>
+<p><img alt="" src="../pics/t11-Import-Topology7.png" /></p>
+</li>
+<li>
+<p>Save Policy by clicking <strong>Save Policy Changes</strong> </p>
+<p><img alt="" src="../pics/t11-Import-Topology8.png" /></p>
+</li>
+<li>
+<p>Activate policy by selecting <strong>...</strong> then <strong>Activate Policy</strong></p>
+<p><img alt="" src="../pics/t11-Import-Topology9.png" /></p>
+</li>
+</ul>
+<h2 id="step-4-verification">Step 4: Verification</h2>
+<ul>
+<li>
+<p>Once the process shows <strong>Sucess</strong> as below. Verify the connectivity using following commands on DC1-vEdge, BR1-vEdge and BR2-vEdge <br/></p>
+<p><code>show ip route vpn 10</code> <br/>
+<code>show ip route vpn 20</code> <br/>
+<code>show ip route vpn 30</code> <br/></p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Task9-AAR/" class="btn btn-neutral float-right" title="Lab Task 9 - Application Aware Routing">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Task7-HubnSpoke_VPN20/" class="btn btn-neutral" title="Lab Task 7 - Hub and Spoke Connetivity"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Task7-HubnSpoke_VPN20/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Task9-AAR/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lab Task 7 - Hub and Spoke Connetivity - Cisco Connect - SDWAN Hands on Lab</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lab Task 7 - Hub and Spoke Connetivity";
+    var mkdocs_page_input_path = "Task7-HubnSpoke_VPN20.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Cisco Connect - SDWAN Hands on Lab</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Topology/">Topology</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task1-Connect/">Lab Task 1 - Remote Connection to Lab</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task2-Exploring Control Plane/">Lab Task 2 - Bring Up and Explore Control Plane</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task3-vEdge/">Lab Task 3 - Bring Up vEdges</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task4-Full-Mesh/">Lab Task 4 - Verify Full Mesh Connectivity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task5-VPN creations/">Lab Task 5 - VPN Creation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task6-OSPF_service/">Lab Task 6 - OSPF Peering</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Lab Task 7 - Hub and Spoke Connetivity</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#task-7-creating-hub-and-spoke-topoloy">Task 7 - Creating Hub and Spoke Topoloy</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#step-1-verify-vedge-routes-for-vpn10-vpn20-and-vpn30">Step 1: Verify vEdge routes for VPN10, VPN20 and VPN30</a></li>
+        
+            <li><a class="toctree-l3" href="#step-2-configure-policy-on-vmanage-to-create-hub-and-spoke-topology">Step 2: Configure Policy on vManage to create Hub and Spoke Topology</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task8-Additional_PHB/">Lab Task 8 - Partial Hub and Spoke</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task9-AAR/">Lab Task 9 - Application Aware Routing</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Cisco Connect - SDWAN Hands on Lab</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Lab Task 7 - Hub and Spoke Connetivity</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="task-7-creating-hub-and-spoke-topoloy">Task 7 - Creating Hub and Spoke Topoloy</h1>
+<p>This task will walk you through the steps to create Hub and Spoke topology for all branches. For AWS we will block TLOC coming in from BR1 and BR2.</p>
+<h2 id="step-1-verify-vedge-routes-for-vpn10-vpn20-and-vpn30">Step 1: Verify vEdge routes for VPN10, VPN20 and VPN30</h2>
+<p>In this step we will SSH to the vEdge in Branch1 and Branch2 and verify routing table showing all connectios are fully mesh.</p>
+<ul>
+<li>
+<p>Launch <strong>Mputty</strong> application from the Remote desktop by clicking on it's icon on the desktop:</p>
+<p><img alt="" src="../pics/t3-mputty.png" /></p>
+</li>
+<li>
+<p>Using <strong>MPutty</strong> on your Remote Desktop session, initiate a <strong>SSH</strong> session to the BR1-vEdge with <strong>IP address</strong> of <strong>198.18.134.105</strong> this vEdge (<strong>BR1-vEdge</strong>).  You can use credentials of <code>admin</code> and <code>admin</code> for  authentication.</p>
+<ul>
+<li>If prompted for "Putty Security Alert" then Trust the host by clicking "Yes" on dialog box.  </li>
+<li>The <strong>SSH credentials</strong> (username and password) are <code>admin</code> and <code>admin</code> respectively</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Note:</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>If <code>admin/admin</code> credentials do not work then you may try using <code>cisco/cisco</code> or <code>cisco1/cisco1</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>On the <strong>SSH</strong> connection, <strong>execute</strong> the below <strong>command</strong> to view configuration of VPN 20 on BR1-vEdge: </p>
+</li>
+</ul>
+<pre><code>show run vpn 20
+</code></pre>
+
+<p>Below screenshot shows VPN 20 configs:</p>
+<p><img alt="" src="../pics/t8a-showrunvpn20-BR1.png" /></p>
+<p>Below screenshot BR2-vEdge for VPN20:</p>
+<p><img alt="" src="../pics/t8a-showrunvpn20-BR2.png" /></p>
+<ul>
+<li><strong>Execute</strong> below <strong>command</strong> to verify the routing table for VPN 20 on both vEdge: </li>
+</ul>
+<pre><code>show ip route vpn 20
+</code></pre>
+
+<p><img alt="" src="../pics/t8a-showiproutevpn20-br1.png" /></p>
+<p>As shown in the output in the below screenshot, preffix 10.20.2.1/32 (BR2 VPN 20 Loopback20) is directly received from  TLOC IP 10.4.0.1 (BR2-TlOC) from both links (MPLS and Private1).</p>
+<p>Also preffix 10.20.100.1/32 (DC-vEdge loopback20) is directly received from TLOC IP 10.1.0.1 (DC-vEdge) from both links (MPLS and Private1).</p>
+<ul>
+<li>Lets look at the screenshots from BR2 which shows that all preffixes are directly received from respective vEdges.</li>
+</ul>
+<p><img alt="" src="../pics/t8a-showiproutevpn20-BR2.png" /></p>
+<p>Below is the output for DC-vEDGE</p>
+<p><img alt="" src="../pics/t8a-showiproutevpn20-DC.png" /></p>
+<table>
+<thead>
+<tr>
+<th><strong>Note:</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>You will notice that there no routes coming in from AWS-vEdges. This is because TLOCs are unreachable between branches and AWS. We will fix this towards the end of the this task.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Let's verify the same using <strong>vManage</strong></p>
+<ul>
+<li>Open Chrome Browser from Workstation and click Viptela vManage from Bookmark Toolbar</li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="../pics/t8a-OpenVitpela.png" /></p>
+<p>At the login page enter user/pass: admin/admin and login.</p>
+<p><img alt="" src="../pics/t8a-vManage login.png" /></p>
+<p>Verify the traffic path using <strong>vManage</strong>. Open <strong>vManage</strong> select <strong>Monitoring&gt;Network</strong></p>
+<p><img alt="" src="../pics/t8a-Trace-verify1.png" /></p>
+<ul>
+<li>Select <strong>BR1-vEdge</strong></li>
+</ul>
+<p><img alt="" src="../pics/t8a-Trace-verify2.png" /></p>
+<ul>
+<li>Select <strong>Troubleshooting</strong> </li>
+</ul>
+<p><img alt="" src="../pics/t8a-Trace-verify3.png" /></p>
+<ul>
+<li>Select <strong>Trace Route</strong> </li>
+</ul>
+<p><img alt="" src="../pics/t8a-Trace-verify4.png" /></p>
+<ul>
+<li>Enter <strong>Destination IP<strong><em>, select </em>*VPN-20</strong> and click </strong>Start**</li>
+</ul>
+<p><img alt="" src="../pics/t8a-Trace-verify5.png" /></p>
+<p>You can verify that the traffic is going directly to BR2-vEdge</p>
+<p><img alt="" src="../pics/t8a-Trace-verify8.png" /></p>
+<p>Follow the same steps and verify <strong>BR2-vEdge</strong> traffic path for <strong>VPN-20</strong> towards <strong>BR1-vEdge</strong>. You will observe the below output.</p>
+<p><img alt="" src="../pics/t8a-Trace-verify9.png" /></p>
+<table>
+<thead>
+<tr>
+<th><strong>Note:</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Follow the same steps to verify VPN10 and VPN30</td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-2-configure-policy-on-vmanage-to-create-hub-and-spoke-topology">Step 2: Configure Policy on vManage to create Hub and Spoke Topology</h2>
+<ul>
+<li>
+<p>Configure Hub and Spoke policy from vManage.</p>
+<p>First we will create Site list, VPN list and TLOC list which will be referred by the policy in the later steps</p>
+<ul>
+<li>Click <strong>Configuration&gt;Template</strong></li>
+</ul>
+<p><img alt="" src="../pics/t8a-Configuration-Policy.png" /></p>
+<ul>
+<li>Click <strong>Add Policy</strong></li>
+</ul>
+<p><img alt="" src="../pics/t8a-Add-Policy.png" /></p>
+<ul>
+<li>Select <strong>Site</strong> and click <strong>New Site List</strong>, enter the details as per below table and click <strong>Add</strong>.</li>
+</ul>
+<p>Fill in Site details as per table below</p>
+<table>
+<thead>
+<tr>
+<th>Site Name</th>
+<th>Site Number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data-Center</td>
+<td>100</td>
+</tr>
+<tr>
+<td>CL-Branch1</td>
+<td>300</td>
+</tr>
+<tr>
+<td>CL-Branch2</td>
+<td>400</td>
+</tr>
+<tr>
+<td>AllBranches</td>
+<td>300-499</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><strong>Note:</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>You have to add each site seperately.</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../pics/t8a-Add-Site-list.png" /></p>
+<p>Once you enter all the sites, below is how the <strong>List</strong> will look like.</p>
+<p><img alt="" src="../pics/t8a-Site-list.png" /></p>
+<ul>
+<li>Now Select <strong>TLOC</strong>, click <strong>New TLOC List</strong>, enter the details as per below table then click <strong>Add</strong>.</li>
+</ul>
+<p><img alt="" src="../pics/t8a-Add-TLOC-list.png" /></p>
+<p>Fill in TLOC details as per table below</p>
+<table>
+<thead>
+<tr>
+<th>Site Name</th>
+<th>TLOC</th>
+<th>Color</th>
+<th>Encap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data-Center</td>
+<td>10.1.0.1</td>
+<td>private1</td>
+<td>ipsec</td>
+</tr>
+<tr>
+<td>Data-Center</td>
+<td>10.1.0.1</td>
+<td>mpls</td>
+<td>ipsec</td>
+</tr>
+<tr>
+<td>CL-Branch1</td>
+<td>10.3.0.2</td>
+<td>private1</td>
+<td>ipsec</td>
+</tr>
+<tr>
+<td>CL-Branch1</td>
+<td>10.3.0.2</td>
+<td>mpls</td>
+<td>ipsec</td>
+</tr>
+<tr>
+<td>CL-Branch2</td>
+<td>10.4.0.1</td>
+<td>private1</td>
+<td>ipsec</td>
+</tr>
+<tr>
+<td>CL-Branch2</td>
+<td>10.4.0.1</td>
+<td>mpls</td>
+<td>ipsec</td>
+</tr>
+</tbody>
+</table>
+<p>Enter Data-Center TLOC values for color <strong>mpls</strong> and click <strong>Add TLOC</strong></p>
+<p><img alt="" src="../pics/t8a-Add-DC-TLOC-1.png" /></p>
+<p>Enter Data-Center TLOC values for color <strong>private1</strong> and click <strong>Save</strong></p>
+<p><img alt="" src="../pics/t8a-Add-DC-TLOC-2.png" /></p>
+<p>Repeat the same step for Branch 1 and Branch 2 TLOCs, below is how the output will look like once you complete this task.</p>
+<p><img alt="" src="../pics/t8a-TLOC-list.png" /></p>
+<ul>
+<li>For adding VPN List Select <strong>VPN</strong>, click <strong>New VPN List</strong>, enter the details as per below table then click <strong>Add</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>VPN Name</th>
+<th>VPN Number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BusinessVPN</td>
+<td>20</td>
+</tr>
+<tr>
+<td>AppVPN</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Marketing</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../pics/t8a-Add-VPN-list1.png" /></p>
+<p>Repeat the same task for AppVPN and Marketing. Once the task is complete, below is how the VPN list looks like.</p>
+<p><img alt="" src="../pics/t8a-VPN-list.png" /></p>
+</li>
+<li>
+<p>Click <strong>Next</strong>, below page will open. Click <strong>Add Topology</strong> then click <strong>Custom Control (Route &amp; TLOC)</strong></p>
+<p><img alt="" src="../pics/t8a-Add-topology.png" /></p>
+<p>Below page will open, on the Middle-Right corner, click <strong>pencil</strong> icon</p>
+<p><img alt="" src="../pics/t8a-topology-default-action1.png" /></p>
+</li>
+</ul>
+<p>Change the <strong>Default Action</strong> from <strong>Reject</strong> to <strong>Accept</strong>, then click <strong>Save Match And Action</strong></p>
+<p><img alt="" src="../pics/t8a-topology-default-action2.png" /></p>
+<p>Verify <strong>Default Action</strong> is changed to <strong>Accept</strong> </p>
+<p><img alt="" src="../pics/t8a-topology-default-action3.png" /></p>
+<ul>
+<li>
+<p>Enter <strong>Name</strong> and <strong>Description</strong> and click <strong>Sequence Type</strong></p>
+<ul>
+<li><strong>Name</strong>: <code>Hub-Spoke</code></li>
+<li><strong>Description</strong>: <code>Hub and Spoke Topology</code></li>
+</ul>
+<p><img alt="" src="../pics/t8a-Seuqence-Rule1.png" /></p>
+<p>Click <strong>Route</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Rule2.png" /></p>
+</li>
+<li>
+<p>Click <strong>Sequence Rule</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type1.png" /></p>
+</li>
+</ul>
+<p>Click <strong>Site</strong> and under <strong>Site list</strong> Select <strong>CL-Branch1</strong>, then click <strong>Action</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type4.png" /></p>
+<p>Select <strong>Accept</strong> then click <strong>TLOC</strong>. Under <strong>TLOC List</strong> enter <strong>Date-Center</strong> then click <strong>Save Match And Actions</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type6.png" /></p>
+<p>Repeat the same steps for CL-Branch2. Below is the output you complete these steps. Click <strong>Save Control Policy</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type8.png" /></p>
+<ul>
+<li>
+<p>Click <strong>Next</strong>, below screen will appear.</p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type9.png" /></p>
+</li>
+<li>
+<p>Click <strong>Next</strong> again on <strong>Application Aware Routing</strong> Screen</p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type10.png" /></p>
+</li>
+<li>
+<p>Enter <strong>Policy Name</strong> and <strong>Description</strong> then click <strong>New Site List</strong> </p>
+<ul>
+<li><strong>Name</strong>: <code>Hub-Spoke</code></li>
+<li><strong>Description</strong>: <code>Hub and Spoke Policy</code></li>
+</ul>
+<p><img alt="" src="../pics/t8a-Seuqence-Type11.png" /></p>
+<p>On <strong>Outbound Site List</strong> select <strong>CL-Branch1</strong> and <strong>Cl-Branch2</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type12.png" /></p>
+<p>Click <strong>Add</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type13.png" />   </p>
+<p>Click <strong>Save Policy</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type14.png" /></p>
+</li>
+<li>
+<p>The Hub and Spoke policy is created, verify policy clicking <strong>"..."</strong> on the right side and select <strong>Preview</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type15.png" /></p>
+<p>Below is the snapshot, what will be configured as part of the <strong>Hub and Spoke Policy</strong>  </p>
+</li>
+</ul>
+<pre><code>policy
+control-policy Hub-Spoke
+sequence 1
+ match route
+  site-list CL-Branch2
+ !
+ action accept
+  set
+   tloc-list Data-Center
+  !
+ !
+!
+sequence 11
+ match route
+  site-list CL-Branch1
+ !
+ action accept
+  set
+   tloc-list Data-Center
+  !
+ !
+ !
+ action accept
+  set
+   tloc-list Data-Center
+  !
+ !
+!
+sequence 41
+ match tloc
+  site-list AllBranches
+ !
+ action reject
+ !
+!
+default-action accept
+!
+lists
+site-list AllBranches
+site-id 300-499 
+!
+site-list CL-Branch1
+site-id 300 
+!
+site-list CL-Branch2
+site-id 400 
+!
+tloc-list Data-Center
+tloc 10.1.0.1 color mpls encap ipsec 
+tloc 10.1.0.1 color private1 encap ipsec 
+!
+!
+!
+apply-policy
+site-list CL-Branch1
+control-policy Hub-Spoke out
+!
+site-list CL-Branch2
+control-policy Hub-Spoke out
+!
+!
+</code></pre>
+
+<ul>
+<li>
+<p>Click <strong>OK</strong>, then activate the policy clicking <strong>"..."</strong> on the right side and select <strong>Activate</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type15b.png" /></p>
+</li>
+<li>
+<p>Click <strong>Activate</strong> again</p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type17.png" /></p>
+<p>The process will start and you can track the status from the <strong>Status Bar</strong>, once the task is sucessfully complete. You will <strong>Status</strong> as <strong>Sucess</strong></p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type18.png" /></p>
+<p>Below is the output once the task is sucessfully completed.</p>
+<p><img alt="" src="../pics/t8a-Seuqence-Type19.png" /></p>
+</li>
+<li>
+<p>Verify the policy. Launch <strong>Mputty</strong> application from the Remote desktop and login to BR1-vEdge and run the following command</p>
+<pre><code>show ip route vpn 20
+</code></pre>
+</li>
+</ul>
+<p>You can notice that the preffix 10.20.2.1/32 (BR2 VPN 20 Loopback20) is now received from  TLOC IP 10.1.0.1 (DC-TlOC) from both links (MPLS and Private1).</p>
+<p><img alt="" src="../pics/t8a-Route-Verify-BR1.png" /></p>
+<p>Verify the same from BR2 and you see prefixes are received from DC.</p>
+<p><img alt="" src="../pics/t8a-Route-Verify-BR2.png" /></p>
+<ul>
+<li>
+<p>Verify the traffic path using <strong>vManage</strong>. Open <strong>vManage</strong> select <strong>Monitoring&gt;Network</strong></p>
+<p><img alt="" src="../pics/t8a-Trace-verify1.png" /></p>
+<p>Select <strong>BR1-vEdge</strong></p>
+<p><img alt="" src="../pics/t8a-Trace-verify2.png" /></p>
+<p>Select <strong>Troubleshooting</strong> </p>
+<p><img alt="" src="../pics/t8a-Trace-verify3.png" /></p>
+<p>Select <strong>Trace Route</strong> </p>
+<p><img alt="" src="../pics/t8a-Trace-verify4.png" /></p>
+<p>Enter <strong>Destination IP<strong><em>, select </em>*VPN-20</strong> and click </strong>Start**</p>
+<p><img alt="" src="../pics/t8a-Trace-verify5.png" /></p>
+<p>You can observe that the traffic is now going via <strong>DC-vEdge</strong>  Loopback IP <strong>10.200.100.1</strong> towards <strong>BR2-vEdge</strong>.</p>
+<p><img alt="" src="../pics/t8a-Trace-verify6.png" /></p>
+<p>Now Verify <strong>BR2-vEdge</strong> traffic path for <strong>VPN-20</strong> towards <strong>BR1-vEdge</strong>. You will observe the below output.</p>
+<p><img alt="" src="../pics/t8a-Trace-verify7.png" /></p>
+<p>Verify connectivity between Both Branches and Data Center on all VPNs (10, 20, 30)</p>
+</li>
+</ul>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Task8-Additional_PHB/" class="btn btn-neutral float-right" title="Lab Task 8 - Partial Hub and Spoke">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Task6-OSPF_service/" class="btn btn-neutral" title="Lab Task 6 - OSPF Peering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Task6-OSPF_service/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Task8-Additional_PHB/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

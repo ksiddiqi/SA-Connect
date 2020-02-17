@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lab Task 9 - Application Aware Routing - Cisco Connect - SDWAN Hands on Lab</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lab Task 9 - Application Aware Routing";
+    var mkdocs_page_input_path = "Task9-AAR.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Cisco Connect - SDWAN Hands on Lab</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Topology/">Topology</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task1-Connect/">Lab Task 1 - Remote Connection to Lab</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task2-Exploring Control Plane/">Lab Task 2 - Bring Up and Explore Control Plane</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task3-vEdge/">Lab Task 3 - Bring Up vEdges</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task4-Full-Mesh/">Lab Task 4 - Verify Full Mesh Connectivity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task5-VPN creations/">Lab Task 5 - VPN Creation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task6-OSPF_service/">Lab Task 6 - OSPF Peering</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task7-HubnSpoke_VPN20/">Lab Task 7 - Hub and Spoke Connetivity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task8-Additional_PHB/">Lab Task 8 - Partial Hub and Spoke</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Lab Task 9 - Application Aware Routing</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#task-9-application-aware-routing">Task 9 - Application Aware Routing</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#step-1-open-vmanage">Step 1: Open vManage</a></li>
+        
+            <li><a class="toctree-l3" href="#step-2-policy-verification">Step 2: Policy Verification</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Cisco Connect - SDWAN Hands on Lab</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Lab Task 9 - Application Aware Routing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="task-9-application-aware-routing">Task 9 - Application Aware Routing</h1>
+<p>In this task, you will be applying application based traffic policy. The policy will be applied to DC, BR1 and BR2 sites.</p>
+<p>CLI policy is already configured on <strong>AppVPN</strong> based on following parameters</p>
+<table>
+<thead>
+<tr>
+<th>SLA Class</th>
+<th>Lantency</th>
+<th>loss</th>
+<th>Jitter</th>
+<th>Link used during Congestion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best Effort</td>
+<td>200</td>
+<td>20</td>
+<td></td>
+<td>Both (mpls and private1)</td>
+</tr>
+<tr>
+<td>Critical Data</td>
+<td>80</td>
+<td>5</td>
+<td>5</td>
+<td>private1</td>
+</tr>
+<tr>
+<td>VoiceSLA</td>
+<td>50</td>
+<td>2</td>
+<td>5</td>
+<td>private1</td>
+</tr>
+<tr>
+<td>Voice/Video</td>
+<td>50</td>
+<td>2</td>
+<td>1</td>
+<td>private1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-1-open-vmanage">Step 1: Open vManage</h2>
+<ul>
+<li>Click <strong>Configuration&gt;Policy</strong> </li>
+</ul>
+<p><img alt="" src="../pics/t9-vmanage-policy.png" /></p>
+<ul>
+<li>
+<p>On the upper right hand side click <strong>Custom Option</strong>, under <strong>Centralized Policy</strong> select <strong>CLI Policy</strong></p>
+<p><img alt="" src="../pics/t9-CLI-Policy.png" /></p>
+</li>
+<li>
+<p>Click <strong>Add Policy</strong></p>
+</li>
+</ul>
+<p><img alt="" src="../pics/t9-CLI-Policy-2.png" /></p>
+<ul>
+<li>
+<p>Enter name of the Policy, description and click <strong>Select File</strong></p>
+<p><img alt="" src="../pics/t9-CLI-Policy-3.png" /></p>
+</li>
+<li>
+<p>Under <strong>Desktop&gt;Policy</strong> folder select file name <strong>AAR.txt</strong></p>
+<p><img alt="" src="../pics/t9-CLI-Policy-4.png" /></p>
+</li>
+<li>
+<p>Click <strong>Add</strong></p>
+<p><img alt="" src="../pics/t9-CLI-Policy-5.png" /></p>
+</li>
+<li>
+<p>Once the policy is added it will be available for activation.</p>
+</li>
+</ul>
+<p><img alt="" src="../pics/t9-CLI-Policy-6.png" /></p>
+<ul>
+<li>Click <strong>...</strong> and select <strong>Activate</strong></li>
+</ul>
+<p><img alt="" src="../pics/t9-CLI-Policy-7.png" /></p>
+<ul>
+<li>Click <strong>Activate</strong> again</li>
+</ul>
+<p><img alt="" src="../pics/t9-CLI-Policy-8.png" /></p>
+<ul>
+<li>Policy Activation Process will start and you will see <strong>Success</strong> Status</li>
+</ul>
+<p><img alt="" src="../pics/t9-CLI-Policy-9.png" /></p>
+<h2 id="step-2-policy-verification">Step 2: Policy Verification</h2>
+<ul>
+<li>Log into <strong>BR2-vEdge</strong> and check if policy is applied. Issue the following command.</li>
+</ul>
+<p><code>show policy from-vsmart</code></p>
+<p>You will see the following output
+<pre><code>BR2-vEdge# show policy from-vsmart
+from-vsmart sla-class BestEffort
+     loss    20
+    latency 200
+from-vsmart sla-class CriticalData
+     loss    5
+     latency 80
+     jitter  5
+from-vsmart sla-class VoiceSLA
+      loss    2
+      latency 50
+      jitter  5
+from-vsmart sla-class VoiceVideoSLA
+      loss    1
+      latency 50
+      jitter  2
+from-vsmart data-policy Data-Policy
+      direction from-service
+from-vsmart app-route-policy _AppVPN_AppRoutePolicyVPN10
+      vpn-list AppVPN
+       sequence 1
+           match
+              dscp 46
+           action
+              sla-class VoiceSLA
+              no sla-class strict
+              sla-class preferred-color mpls
+       sequence 11
+           match
+             dscp 24
+          action
+            sla-class       CriticalData
+            no sla-class strict
+            sla-class preferred-color mpls
+       sequence 21
+           match
+             dscp 0
+           action
+             sla-class       BestEffort
+             no sla-class strict
+             sla-class preferred-color private1
+       sequence 31
+           match
+             app-list Lync
+           action
+             sla-class       VoiceSLA
+             no sla-class strict
+             sla-class preferred-color mpls
+       sequence 41
+           match
+             app-list Office365
+          action
+            sla-class       CriticalData
+            no sla-class strict
+            sla-class preferred-color mpls
+       sequence 51
+           match
+             app-list YouTube
+           action
+             sla-class       VoiceVideoSLA
+             no sla-class strict
+             sla-class preferred-color private1
+        sequence 61
+            match
+              app-list HTTPS
+              dscp     46
+            action
+              sla-class       BestEffort
+              no sla-class strict
+              sla-class preferred-color private1
+        default-action sla-class BestEffort
+from-vsmart lists vpn-list AppVPN
+     vpn 10
+from-vsmart lists app-list HTTPS
+     app-family web
+     app-family webmail
+from-vsmart lists app-list Lync
+     app lync
+from-vsmart lists app-list Office365
+     app office365
+from-vsmart lists app-list YouTube
+     app youtube_hd
+</code></pre></p>
+<ul>
+<li>Under normal conditions, both BR2-vEdge is using both interfaces to send traffic as show in the output.</li>
+</ul>
+<p><strong><code>show app-route stats</code></strong></p>
+<p><img alt="" src="../pics/t9-AAR-policyverfication1.png" /></p>
+<ul>
+<li>
+<p>Lets inject delay using traffic generator on <strong>BR2-vEdge Internet (color private1)</strong> link.</p>
+</li>
+<li>
+<p>Open a new <strong>Browser</strong> tab and on the bookmark toolbar click <strong>WANem</strong>.</p>
+<p><img alt="" src="../pics/t9-AAR-policyverfication2.png" /></p>
+</li>
+<li>
+<p>Click <strong>Basic Mode</strong></p>
+<p><img alt="" src="../pics/t9-AAR-policyverfication3.png" /></p>
+</li>
+<li>
+<p>Under <strong>Bridges</strong> ensure <strong>br1</strong> is selected. Under <strong>Interface eth2</strong> enter delay <strong>300</strong> and <strong>Apply settings</strong></p>
+<p><img alt="" src="../pics/t9-AAR-policyverfication4.png" /></p>
+</li>
+<li>
+<p>Lets verify the policy out again on BR2-vEdge by using command <strong><code>show app-route stats</code></strong></p>
+<p><img alt="" src="../pics/t9-AAR-policyverfication6.png" /></p>
+</li>
+</ul>
+<p>From the output above you can all traffic matching to <strong>sla-class-index</strong> moved to link color <strong>private1</strong></p>
+<p>Only traffic matching <strong>sla-class-index</strong> <strong>"0"</strong> is on both links.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../Task8-Additional_PHB/" class="btn btn-neutral" title="Lab Task 8 - Partial Hub and Spoke"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Task8-Additional_PHB/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

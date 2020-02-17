@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lab Task 6 - OSPF Peering - Cisco Connect - SDWAN Hands on Lab</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lab Task 6 - OSPF Peering";
+    var mkdocs_page_input_path = "Task6-OSPF_service.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Cisco Connect - SDWAN Hands on Lab</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Topology/">Topology</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task1-Connect/">Lab Task 1 - Remote Connection to Lab</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task2-Exploring Control Plane/">Lab Task 2 - Bring Up and Explore Control Plane</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task3-vEdge/">Lab Task 3 - Bring Up vEdges</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task4-Full-Mesh/">Lab Task 4 - Verify Full Mesh Connectivity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task5-VPN creations/">Lab Task 5 - VPN Creation</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Lab Task 6 - OSPF Peering</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#task-6-adding-ospf-router-to-branch-2">Task 6 - Adding OSPF Router to Branch 2</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#sdwan-lab-topology">SDWAN Lab Topology</a></li>
+        
+            <li><a class="toctree-l3" href="#step-1-adding-ospf-config-in-br2">Step 1: Adding OSPF config in BR2</a></li>
+        
+            <li><a class="toctree-l3" href="#step-2-validate-ospf-in-br2">Step 2: Validate OSPF in BR2</a></li>
+        
+            <li><a class="toctree-l3" href="#step-3-verify-ospf-routes-redistribution">Step 3: Verify OSPF routes redistribution</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task7-HubnSpoke_VPN20/">Lab Task 7 - Hub and Spoke Connetivity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task8-Additional_PHB/">Lab Task 8 - Partial Hub and Spoke</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task9-AAR/">Lab Task 9 - Application Aware Routing</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Cisco Connect - SDWAN Hands on Lab</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Lab Task 6 - OSPF Peering</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="task-6-adding-ospf-router-to-branch-2">Task 6 - Adding OSPF Router to Branch 2</h1>
+<p>This Task will walk through the steps to perform OSPF peering of the vEdge in Branch 2 on the LAN.  The traffic on the LAN is referred to as Service Side on vEdge.  The OSPF peering will be done for VPN 10 in this exercise.  VPN 10 already exists in BR1 and BR2.</p>
+<p>Cisco CSRv exists on the LAN side of BR2 and this CSRv has already been configured with appropriate configurations for OSPF peering.</p>
+<h4 id="sdwan-lab-topology">SDWAN Lab Topology</h4>
+<p>The logical topology of this branch is shown in below figure:</p>
+<p><img alt="" src="../pics/t6-ospf-topology.png" /></p>
+<p><strong>Pre-requisite:</strong></p>
+<p>SDWAN controllers and vEdges (in Branches &amp; DC) must be fully operational.  If those are not installed (or not operational) then please complete the previous Tasks first.</p>
+<h2 id="step-1-adding-ospf-config-in-br2">Step 1: Adding OSPF config in BR2</h2>
+<p>In this step we will configure OSPF area 0 configurations on the vEdge and also validate that the configurations are applied properly.</p>
+<ul>
+<li>Log on to the vManage from a web browser (if not already open) and use credentials of <code>admin</code> and <code>admin</code>:</li>
+</ul>
+<pre><code>https://198.18.1.10
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">If <code>admin/admin</code> credentials do not work then you may try using <code>cisco/cisco</code> or <code>cisco1/cisco1</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>On the vManage GUI, navigate to <strong>Configuration &gt; Templates &gt; Device</strong>.  </p>
+</li>
+<li>
+<p>We will make a copy of the existing CLI Template and edit the new Template to add OSPF configurations.  <strong>Click</strong> on the three dots  <code>...</code> on right-side of <strong>"CL-BR2-vEdge1" &gt; Copy</strong>.  Next:</p>
+<ul>
+<li><strong>Name</strong> the new template as <code>CL-BR2-vEdge1-ospf</code></li>
+<li>You may modify <strong>description</strong> to state: <code>Branch2 vEdge1 configs with ospf</code></li>
+</ul>
+</li>
+<li>
+<p>Then <strong>Select</strong> the newly CLI template named <strong>"CL-BR2-vedge-ospf"</strong>.  And, <strong>Click</strong> on the three dots <code>...</code> on right-side of <strong>"CL-BR2-vedge-ospf"</strong> and <strong>Select</strong> <code>Edit</code> from the drop-down menu.</p>
+</li>
+<li>
+<p>Edit option will allow you to add <strong>additional configurations</strong> in this template as per below:  </p>
+<ul>
+<li><strong>Scroll</strong> all the way to the end of existing template, </li>
+<li>Then you can <strong>add</strong>  (copy &amp; paste) the below configuration at the end of the exiting template,</li>
+<li><strong>Note:</strong> Do not make any other changes to existing configurations in this template</li>
+</ul>
+</li>
+</ul>
+<pre><code>vpn 10
+ router
+  ospf
+   default-information originate
+   redistribute omp
+   area 0
+    interface ge0/2
+    exit
+   exit
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Above configs perform OSPF configuration as well as redistribution of OMP routes into OSPF with "redistribute omp" command</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Click <strong>Update</strong> to save the new configurations in the template.</p>
+</li>
+<li>
+<p>Now <strong>Attach</strong> this new template (named: "CL-BR2-vEdge1-ospf") to <code>BR2-vEdge</code> by:</p>
+<ul>
+<li><strong>Click</strong> on the three dots <code>...</code> on right-side of <strong>"CL-BR2-vEdge1"</strong></li>
+<li>Select <strong>Attach Devices</strong> from dropdown menu</li>
+</ul>
+</li>
+<li>
+<p>Then on next screen, </p>
+<ul>
+<li><strong>Select</strong> <code>BR2-vEdge</code> with System IP of <code>10.4.0.1</code> in the Available devices</li>
+<li><strong>Click</strong> the <code>Right Arrow</code>.  At this point BR2-vEdge will move to the Selected Devices</li>
+<li>then <strong>Click</strong> on Attach</li>
+</ul>
+</li>
+<li>
+<p>On the subsequent screen, <strong>Click</strong> the <code>Next</code> button</p>
+</li>
+<li>
+<p>On the next screen, <strong>Click</strong> on <code>BR2-vEdge</code> (with <em>uuid</em> of <code>ddd801b2-8cbe-4394-abd1-3b71e39886e3</code>) on left section and <strong>Click</strong> on <code>Config Preview</code> and <code>Config Diff</code> options on the right side of window to confirm correct configurations are pushed to this BR2-vEdge.  </p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Important Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Be very careful in making configuration changes on vEdge.  <strong>Do NOT change</strong> any <strong>configuration</strong> of VPN 512 as it can result in loss of connectivity to the vEdge - which can not be restored.   You will have to start the lab again from Task #1 if you loose network connectivity to a vEdge.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Next <strong>Click</strong> on the <code>Configure Devices</code> button on bottom of the screen.  On the subsequent screen verify that the template is attached successfully to BR2-vEdge</li>
+</ul>
+<h2 id="step-2-validate-ospf-in-br2">Step 2: Validate OSPF in BR2</h2>
+<p>Now lets confirm the OSPF configurations are pushed to vEdge and routes are learned from the OSPF neighbor.</p>
+<ul>
+<li>
+<p>You may access BR2-vEdge by direct <strong>SSH</strong> using the <strong>Mputty client</strong> and initiate SSH to BR2-vEdge with <strong>IP address</strong> of <strong>198.18.134.106</strong> .  Or you may access it the main menu of vManage GUI by navigating to <strong>Tools &gt; SSH Terminal</strong>.  Make sure Device Group states All and  </p>
+<ul>
+<li><strong>Click</strong> on the <strong>BR2-vEdge</strong>.  </li>
+<li>Log into vEdge by using credentials:<ul>
+<li>Login name: <code>admin</code> </li>
+<li>Password: <code>admin</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">If <code>admin/admin</code> credentials do not work then you may try using <code>cisco/cisco</code> or <code>cisco1/cisco1</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Next, <strong>execute</strong> the below commands to verify that OSPF configuration on the vEdge-1 in Branch-1:</p>
+</li>
+</ul>
+<pre><code>show run vpn 10
+show ospf neighbor
+show ospf routes
+show ip routes vpn 10
+</code></pre>
+
+<p>Below screenshot shows the output of of above commands on BR2-vEdge:</p>
+<p><img alt="" src="../pics/t6-br2-showrunvpn10-ospf-routes.png" /></p>
+<p>From the output of above commands, <strong>confirm</strong> that vEdge-1 in Branch #1 shows that:</p>
+<ul>
+<li><strong>OSPF</strong> configurations <strong>under VPN 10</strong> exist on the vEdge,</li>
+<li><strong>OSPF neighbor</strong> with the <strong>10.4.254.254</strong> exists,</li>
+<li>below <strong>OSPF routes</strong> are learned from this neighbor:<ul>
+<li>prefix: <strong>10.4.0.0/24</strong></li>
+<li>prefix: <strong>10.4.254.0/24</strong></li>
+</ul>
+</li>
+<li>these OSPF routes are installed in the routing table.</li>
+</ul>
+<h2 id="step-3-verify-ospf-routes-redistribution">Step 3: Verify OSPF routes redistribution</h2>
+<p>In the previous step, we configured the OSPF peering between BR2-vEdge and a neigbouring router on the LAN of this Branch2.  </p>
+<p>Now lets confirm that OSPF routes (learned on BR2) are redistributed via OMP towards BR1.</p>
+<ul>
+<li>
+<p>Using <strong>Mputty</strong> client on remote desktop, initiate a <strong>SSH</strong> session to <strong>BR1-vEdge</strong> (with IP address of <strong>198.18.134.105</strong>).  </p>
+</li>
+<li>
+<p>Execute below commands on <strong>BR1-vEdge</strong> to verify that OSPF routes are learned from BR2:</p>
+</li>
+</ul>
+<pre><code>show ip routes vpn 10
+show omp routes
+</code></pre>
+
+<p>Below screenshot shows the output of of above commands on BR1-vEdge:</p>
+<p><img alt="" src="../pics/t6-br1-show-route-omp.png" /></p>
+<p>From the output of above commands, verify that OSPF routes of <strong>10.4.0.0</strong> has been <strong>redistributed via OMP</strong> by BR2-vEdge</p>
+<ul>
+<li>On <strong>BR1-vEdge</strong>, we can get more details (attributes learned via OMP) about the routes by using below command:</li>
+</ul>
+<pre><code>show omp routes vpn 10 10.4.0.0/24 detail
+</code></pre>
+
+<p>Below screenshot shows the output of of above commands on BR1-vEdge:</p>
+<p><img alt="" src="../pics/t6-br1-show-omp-det.png" /></p>
+<p>From the output of above command you can verify the attributes for <code>10.4.0.0/24</code> route such as:</p>
+<ul>
+<li><code>origin-proto</code> is <code>OSPF-intra-area</code> (so route is originated by OSPF)</li>
+<li>
+<p><code>tloc</code> entries show: </p>
+<ul>
+<li><code>system IP</code> of <code>10.4.0.1</code>, </li>
+<li><code>color</code> of <code>mpls</code> &amp; <code>private1</code>.  This means that the route is learned over both WAN links (identified by color).</li>
+</ul>
+</li>
+<li>
+<p>In contrast you may run below command to see the <code>origin-proto</code> for route <code>10.4.254.0</code>:</p>
+</li>
+</ul>
+<pre><code>show omp routes vpn 10 10.4.254.0/24 detail
+</code></pre>
+
+<p>Does the above output <code>10.4.254.0</code> makes sense?
+ It basically shows that the route was directly connected on BR2! </p>
+<hr />
+<p>You have successfully finished this task of configuring OSPF on Service side of a branch</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Task7-HubnSpoke_VPN20/" class="btn btn-neutral float-right" title="Lab Task 7 - Hub and Spoke Connetivity">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Task5-VPN creations/" class="btn btn-neutral" title="Lab Task 5 - VPN Creation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Task5-VPN creations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Task7-HubnSpoke_VPN20/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

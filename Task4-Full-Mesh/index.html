@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lab Task 4 - Verify Full Mesh Connectivity - Cisco Connect - SDWAN Hands on Lab</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lab Task 4 - Verify Full Mesh Connectivity";
+    var mkdocs_page_input_path = "Task4-Full-Mesh.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Cisco Connect - SDWAN Hands on Lab</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Topology/">Topology</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task1-Connect/">Lab Task 1 - Remote Connection to Lab</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task2-Exploring Control Plane/">Lab Task 2 - Bring Up and Explore Control Plane</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task3-vEdge/">Lab Task 3 - Bring Up vEdges</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Lab Task 4 - Verify Full Mesh Connectivity</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#step-1-verify-ipsec-tunnels-on-br1">Step 1: Verify IPSec tunnels on BR1</a></li>
+    
+
+    <li class="toctree-l2"><a href="#step-2-verify-ipsec-tunnels-on-br2">Step 2: Verify IPSec tunnels on BR2</a></li>
+    
+
+    <li class="toctree-l2"><a href="#step-3-verify-ipsec-tunnels-on-dc">Step 3: Verify IPSec tunnels on DC</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task5-VPN creations/">Lab Task 5 - VPN Creation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task6-OSPF_service/">Lab Task 6 - OSPF Peering</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task7-HubnSpoke_VPN20/">Lab Task 7 - Hub and Spoke Connetivity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task8-Additional_PHB/">Lab Task 8 - Partial Hub and Spoke</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task9-AAR/">Lab Task 9 - Application Aware Routing</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Cisco Connect - SDWAN Hands on Lab</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Lab Task 4 - Verify Full Mesh Connectivity</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>This task will walk through the steps to verify the full mesh VPN topology on the SD-WAN Fabric.  As per previous steps of onboarding the vEdges has been performed.  By default all the vEdges in SD-WAN Fabric will create a full mesh IPSec tunnels.</p>
+<p><strong>Pre-requisite:</strong>  SDWAN controllers and 3 vEdges (in Branches &amp; DC) must be fully operational.  If those are not installed (or not operational) then please complete the previous Tasks first.</p>
+<h2 id="step-1-verify-ipsec-tunnels-on-br1">Step 1: Verify IPSec tunnels on BR1</h2>
+<ul>
+<li>
+<p>You can launch SSH to vEdge in Branch-1 by using <strong>MPutty</strong> client on the Remote Desktop: </p>
+<ul>
+<li><strong>SSH</strong> to OOB Management IP address of <strong>BR1-vEdge</strong>:  <code>198.18.134.105</code></li>
+<li>
+<p>Use credentials of <code>admin</code> and <code>admin</code> for  authentication</p>
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">If <code>admin/admin</code> credentials do not work then you may try using <code>cisco/cisco</code> or <code>cisco1/cisco1</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>On the SSH connection to vEdge, execute the below commands to verify that OMP routes have been received by this vEdge:</p>
+</li>
+</ul>
+<pre><code>show omp routes
+show ip route
+</code></pre>
+
+<ul>
+<li>On the SSH connection to vEdge, execute the below commands to verify that IPSec tunnels are setup to remote vEdges.   BFD is enabled by default on the IPSec tunnels:</li>
+</ul>
+<pre><code>show bfd session
+show bfd session | tab
+</code></pre>
+
+<p>Below screenshot shows the output of above command confirming that IPSec tunnels on both WAN links are setup to DC and BR2:</p>
+<p><img alt="" src="../pics/t4-br1-show_bfd_sess.png" /></p>
+<h2 id="step-2-verify-ipsec-tunnels-on-br2">Step 2: Verify IPSec tunnels on BR2</h2>
+<ul>
+<li>
+<p>You can launch SSH to vEdge in Branch-2 by using <strong>MPutty</strong> client on the Remote Desktop: </p>
+<ul>
+<li><strong>SSH</strong> to OOB Management IP address of <strong>BR2-vEdge</strong>:  <code>198.18.134.106</code></li>
+<li>
+<p>Use credentials of <code>admin</code> and <code>admin</code> for  authentication</p>
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">If <code>admin/admin</code> credentials do not work then you may try using <code>cisco/cisco</code> or <code>cisco1/cisco1</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>On the SSH connection to vEdge, execute the below commands to verify that OMP routes have been received by this vEdge:</p>
+</li>
+</ul>
+<pre><code>show omp routes
+show ip route
+</code></pre>
+
+<ul>
+<li>On the SSH connection to vEdge, execute the below commands to verify that IPSec tunnels are setup to remote vEdges.   BFD is enabled by default on the IPSec tunnels:</li>
+</ul>
+<pre><code>show bfd session 
+show bfd session | tab
+</code></pre>
+
+<p>Below screenshot shows the output of above command confirming that IPSec tunnels on both WAN links are setup to DC and BR1:</p>
+<p><img alt="" src="../pics/t4-br2-show_bfd_sess.png" /></p>
+<h2 id="step-3-verify-ipsec-tunnels-on-dc">Step 3: Verify IPSec tunnels on DC</h2>
+<ul>
+<li>
+<p>You can launch SSH to vEdge on DC by using <strong>MTPutty</strong> client on the Remote Desktop: </p>
+<ul>
+<li><strong>SSH</strong> to OOB Management IP address of <strong>DC1-VEDGE</strong>:  <code>198.18.134.100</code></li>
+<li>
+<p>Use credentials of <code>admin</code> and <code>admin</code> for  authentication</p>
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">If <code>admin/admin</code> credentials do not work then you may try using <code>cisco/cisco</code> or <code>cisco1/cisco1</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>On the SSH connection to vEdge, execute the below commands to verify that OMP routes have been received by this vEdge:</p>
+</li>
+</ul>
+<pre><code>show omp routes
+show ip route
+</code></pre>
+
+<ul>
+<li>On the SSH connection to vEdge, execute the below commands to verify that IPSec tunnels are setup to remote vEdges.   BFD is enabled by default on the IPSec tunnels:</li>
+</ul>
+<pre><code>show bfd session
+show bfd session | tab
+</code></pre>
+
+<p>Below screenshot shows the output of above command confirming that IPSec tunnels on both WAN links are setup to BR1 and BR2:</p>
+<p><img alt="" src="../pics/t4-dc-show_bfd_sess.png" /></p>
+<hr />
+<p>This concludes this task to verify the full mesh topology</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Task5-VPN creations/" class="btn btn-neutral float-right" title="Lab Task 5 - VPN Creation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Task3-vEdge/" class="btn btn-neutral" title="Lab Task 3 - Bring Up vEdges"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Task3-vEdge/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Task5-VPN creations/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

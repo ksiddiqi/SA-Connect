@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Lab Task 5 - VPN Creation - Cisco Connect - SDWAN Hands on Lab</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lab Task 5 - VPN Creation";
+    var mkdocs_page_input_path = "Task5-VPN creations.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Cisco Connect - SDWAN Hands on Lab</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Topology/">Topology</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task1-Connect/">Lab Task 1 - Remote Connection to Lab</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task2-Exploring Control Plane/">Lab Task 2 - Bring Up and Explore Control Plane</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task3-vEdge/">Lab Task 3 - Bring Up vEdges</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task4-Full-Mesh/">Lab Task 4 - Verify Full Mesh Connectivity</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Lab Task 5 - VPN Creation</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#task-5-vpn-on-the-fabric">Task 5 - VPN on the Fabric</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#sdwan-lab-topology">SDWAN Lab Topology</a></li>
+        
+            <li><a class="toctree-l3" href="#step-1-create-vpn-10-on-branch-1-br1">Step 1: Create VPN 10 on Branch 1 (BR1)</a></li>
+        
+            <li><a class="toctree-l3" href="#step-2-validate-vpn-10-config-on-branch-1">Step 2: Validate VPN 10 config on Branch 1</a></li>
+        
+            <li><a class="toctree-l3" href="#step-3-create-vpn-10-on-branch-2-br2">Step 3: Create VPN 10 on Branch 2 (BR2)</a></li>
+        
+            <li><a class="toctree-l3" href="#step-4-verify-vpn-10-routing-on-br1-br2">Step 4: Verify VPN 10 routing on BR1 &amp; BR2</a></li>
+        
+            <li><a class="toctree-l3" href="#step-5-create-vpn-10-on-data-center-dc">Step 5: Create VPN 10 on Data Center (DC)</a></li>
+        
+            <li><a class="toctree-l3" href="#step-6-validate-vpn-10-config-on-dc">Step 6: Validate VPN 10 config on DC</a></li>
+        
+            <li><a class="toctree-l3" href="#step-7-add-vpn-20-and-30-on-all-vedges-dc1-branch1-branch2">Step 7: Add VPN 20 and 30 on all vEdges (DC1, Branch1 &amp; Branch2)</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task6-OSPF_service/">Lab Task 6 - OSPF Peering</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task7-HubnSpoke_VPN20/">Lab Task 7 - Hub and Spoke Connetivity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task8-Additional_PHB/">Lab Task 8 - Partial Hub and Spoke</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Task9-AAR/">Lab Task 9 - Application Aware Routing</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Cisco Connect - SDWAN Hands on Lab</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Lab Task 5 - VPN Creation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="task-5-vpn-on-the-fabric">Task 5 - VPN on the Fabric</h1>
+<p>This task will walk through the steps to create full mesh VPN on the SD-WAN Fabric.  Hence the traffic on these VPNs can be passed on the SDWAN Fabric keeping the end-to-end segmentation.  We will create VPN number 10, 20, 30 in this exercise.  These VPNs will exist on vEdges in BR1 and BR2 Branches as well as on Data Center (DC).</p>
+<p>This configuration of vEdge can be done via Feature Templates or by using CLI Template on the vManage.  We will use CLI Template of the vEdge for this lab.  To provide differentiation, two separate CLI Templates will be created for vEdges in DC and Branches.</p>
+<h4 id="sdwan-lab-topology">SDWAN Lab Topology</h4>
+<p>The logical topology of VPN number 10 is shown in below figure:</p>
+<p><img alt="" src="../pics/t5-vpn10_topology.png" /></p>
+<p><strong>Pre-requisite:</strong>  SDWAN controllers and 3 vEdges (in Branches &amp; DC) must be fully operational.  If those are not installed (or not operational) then please complete the previous Tasks first.</p>
+<h2 id="step-1-create-vpn-10-on-branch-1-br1">Step 1: Create VPN 10 on Branch 1 (BR1)</h2>
+<p>A new VPN (number 10) will be used to pass traffic between Applications between Branches, the Data Centers and subsequently to the application hosted on AWS Cloud. </p>
+<ul>
+<li>
+<p>Log on to the vManage from a web browser (if not already open) and use credentials of <code>admin</code> and <code>admin</code>:</p>
+<pre><code>https://198.18.1.10
+</code></pre>
+</li>
+<li>
+<p>On the vManage GUI, navigate to <strong>Configuration &gt; Templates &gt; Device</strong>.  </p>
+</li>
+<li>
+<p>Then <strong>Select</strong> the CLI template named <strong>"CL-branch-1-vedge"</strong>.  Next, Click on the three dots on right-side of <strong>"CL-branch-1-vedge" &gt; Edit</strong> as shown in below screenshot. </p>
+<p><img alt="" src="../pics/t5-br1-clitemplate-edit2.png" /></p>
+</li>
+<li>
+<p>Edit option will allow you to add additional configurations in this template.  </p>
+<ul>
+<li><strong>Scroll</strong> all the way to the end of existing template, </li>
+<li>Then you can <strong>add</strong>  (copy &amp; paste will work) the below configuration at the end of the exiting template,</li>
+<li>Do not make any other changes to existing configurations in this template<pre><code>vpn 10
+ name AppVPN
+ interface ge0/3
+  ip address {{vpn10-IP-address}}/24
+  no shutdown
+</code></pre>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Above configuration must include <code>{{vpn10-IP-address}}</code> syntax.  Double curly brackets are interpreted as variable and this will be used to fill out IP addresses of each vEdge in the branch in subsequent bullet (during deployment of template)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">Important Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Be very careful in making configuration changes on vEdge.  <strong>Do NOT change</strong> any <strong>configuration</strong> of VPN 512 as it can result in loss of connectivity to the vEdge - which can not be restored.   You will have to start the lab again from Task #1 if you loose network connectivity to a vEdge.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>After adding above configuration to this Template, <strong>Click</strong> on <code>Update</code> button.  </p>
+</li>
+<li>
+<p>On the next screen, enter the <strong>ge0/3 IP address</strong> of <strong>vpn10-IP-address</strong> <code>10.3.0.3</code> for Branch-1 in the respective field and <strong>Click</strong> the <code>Next</code> button.  Below screenshot shows this:</p>
+<p><img alt="" src="../pics/t5-br1-clitemplate-vpn10ge03.png" /></p>
+</li>
+<li>
+<p>On the next screen,</p>
+<ul>
+<li><strong>Select</strong> the <code>BR1-vEdge</code> under the <strong>Device list</strong> section (left part of screen).  </li>
+<li>
+<p>Then <strong>Select</strong> both <code>"Config Preview"</code> and <code>"Config Diff"</code> options to verify that VPN 10 related configurations are added to this vEdge, and no changes to VPN 512 (or other interfaces) are done.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Important Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Be very careful in making configuration changes on vEdge.  <strong>Do NOT change</strong> any <strong>configuration</strong> of VPN 512 as it can result in loss of connectivity to the vEdge - which can not be restored.   You will have to start the lab again from Task #1 if you loose network connectivity to a vEdge.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Once you have verifed the config changes <strong>Click</strong> on <code>Configure Devices</code> button on the lower section of screen, as shown in below screenshot:</p>
+</li>
+</ul>
+<p><img alt="" src="../pics/t5-br1-clitemplate-loopback-configdev.png" /></p>
+</li>
+</ul>
+<p>This completes the configuration of VPN 10 on BR1-vEdge</p>
+<h2 id="step-2-validate-vpn-10-config-on-branch-1">Step 2: Validate VPN 10 config on Branch 1</h2>
+<p>In this step we will confirm that BR1-vEdge has been provisioned for VPN #10 (as executed in the previous step).  There are multiple ways to access the configuration of vEdge, such as:</p>
+<ul>
+<li><strong>Direct SSH</strong> to Management IP address (VPN 512) of the vEdges</li>
+<li>Initiate <strong>SSH</strong> to vEdges from the <strong>vManage GUI</strong></li>
+<li>Access the Running configuration of vEdges within vManage GUI by clicking on <strong>Configuration &gt; Devices &gt; Click on three dots on the right</strong> (next to the name) of vEdge and click <strong>Running Configuration</strong> from the drop-down menu</li>
+</ul>
+<p>Below, we will use direct SSH mechanism to verify the configurtions:</p>
+<ul>
+<li>
+<p>You can launch SSH to vEdge in Branch-1 by using <strong>MPutty</strong> client on the Remote Desktop: </p>
+<ul>
+<li><strong>SSH</strong> to OOB Management IP address of <strong>BR1-vEdge</strong>:  <code>198.18.134.105</code></li>
+<li>Use credentials of <code>admin</code> and <code>admin</code> for  authentication</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">If <code>admin/admin</code> credentials do not work then you may try using <code>cisco/cisco</code> or <code>cisco1/cisco1</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>On the SSH connection to vEdge, execute the below commands to:</p>
+<ul>
+<li>verify that VPN 10 has been successfully configured by vManage</li>
+<li>verify vEdge has connectivity to local device (on the LAN of vEdge) in VPN 10 by initiating a ping to a host on LAN :<pre><code>show run vpn 10
+ping vpn 10 10.3.0.10
+</code></pre>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">you can enter Control-C (Ctrl-C) to stop the ping</td>
+</tr>
+</tbody>
+</table>
+<p>Below screenshot shows the output of above command:</p>
+<p><img alt="" src="../pics/t5-br1-showrun-vpn10ge03-ping.png" /></p>
+</li>
+</ul>
+<p>This successfully adds VPN 10 to Branch 1</p>
+<h2 id="step-3-create-vpn-10-on-branch-2-br2">Step 3: Create VPN 10 on Branch 2 (BR2)</h2>
+<p>Now lets create VPN 10 on BR2 vEdge.  </p>
+<p>You will use the above procedure in <strong>Step 1</strong> &amp; <strong>Step 2</strong> to create &amp; verify VPN 10 on vEdge in Branch-2 (BR2-vEdge).  But in case of vEdge in Branch-2 you will need to <strong>adapt</strong> to below changes:</p>
+<ul>
+<li>
+<p>vEdge in Branch-2, with hostname BR2-vEdge, uses the <strong>CLI Template</strong> named: <code>CL-BR2-vEdge1</code>.  Hence you need to modify this template to add VPN 10 configurations</p>
+</li>
+<li>
+<p>VPN 10 will be configured on port <strong>ge0/2</strong> on vEdge in Branch-2.  Hence the below vpn 10 configuration will be added at the end of CLI template named <code>CL-BR2-vEdge1</code>:</p>
+<pre><code>vpn 10
+ name AppVPN
+ interface ge0/2
+  ip address {{vpn10-IP-address}}/24
+  no shutdown
+</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">Important Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Be very careful in making configuration changes on vEdge.  <strong>Do NOT change</strong> any <strong>configuration</strong> of VPN 512 as it can result in loss of connectivity to the vEdge - which can not be restored.   You will have to start the lab again from Task #1 if you loose network connectivity to a vEdge.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>vEgde in Branch-2 will be configured for IP address of <code>10.4.254.10</code> on the <strong>ge0/2</strong></p>
+</li>
+</ul>
+<p>Once the new template with VPN10 has been deployed then:</p>
+<ul>
+<li>
+<p>Using <strong>MPutty</strong>, initiate a <strong>SSH</strong> connection to <strong>BR2-vEdge</strong>, and execute the below commands to:</p>
+<ul>
+<li>verify that VPN 10 has been successfully configured by vManage</li>
+<li>verify vEdge has connectivity to local device (on the LAN of vEdge) in VPN 10 by initiating a ping to a host on LAN:<pre><code>show run vpn 10
+ping vpn 10 10.4.254.254
+</code></pre>
+</li>
+</ul>
+<p>This will successfully add VPN 10 to vEdge in Branch 2.  Below screenshot shows a successful test for BR2-vEdge:</p>
+<p><img alt="" src="../pics/t5-br2-showvpn10ge02-ping.png" /></p>
+</li>
+</ul>
+<h2 id="step-4-verify-vpn-10-routing-on-br1-br2">Step 4: Verify VPN 10 routing on BR1 &amp; BR2</h2>
+<p>Now we can verify the IP connectivity between vEdge in Branch-1 and Branch-2 on the VPN 10.</p>
+<ul>
+<li>
+<p>Using MTPutty, initiate SSH connections to <strong>BR1-vEdge</strong> and <strong>BR2-vEdge</strong></p>
+</li>
+<li>
+<p>Execute below commands on <strong>both</strong> <strong>BR1-vEdge</strong> and <strong>BR2-vEdge</strong></p>
+<pre><code>show ip route 
+show ip route vpn 10
+show omp routes
+show omp routes vpn 10
+</code></pre>
+<p>You should verify that each vEdge has learned the LAN segment IP address of remote vEdge (within VPN 10) </p>
+<p>Below screenshot shows an example of partial execution of above commands from BR2-vEdge:</p>
+<p><img alt="" src="../pics/t5-br2-showiproutes.png" /></p>
+<p>This confirms that VPN 10 is routed properly between BR1 and BR2</p>
+</li>
+</ul>
+<h2 id="step-5-create-vpn-10-on-data-center-dc">Step 5: Create VPN 10 on Data Center (DC)</h2>
+<p>Now lets configure this new VPN (number 1) on the vEdge in Data Center (DC). </p>
+<ul>
+<li>Log on to the vManage from a web browser (if not already open) and use credentials of <code>admin</code> and <code>admin</code>:</li>
+</ul>
+<pre><code>https://198.18.1.10
+</code></pre>
+
+<ul>
+<li>
+<p>Enter the <code>admin/admin</code> credentials for authentication</p>
+</li>
+<li>
+<p>On the vManage GUI, navigate to <strong>Configuration &gt; Templates</strong>   </p>
+</li>
+<li>
+<p>Then from <strong>Device</strong> tab, <strong>Select</strong> the CLI template named <strong>"CL-DC-vedge"</strong>.  Next, Click on the three dots <code>...</code> on right-side of <strong>"CL-DC-vedge"</strong> and  Select <strong>Edit</strong> from the drop downmenu  </p>
+</li>
+<li>
+<p>Next the configuration below at the end of the template. </p>
+</li>
+</ul>
+<pre><code>!
+vpn 10
+ interface ge0/0
+  ip address 198.18.133.211/18
+  no shutdown
+ !
+</code></pre>
+
+<ul>
+<li>
+<p>After adding above configuration to Template, Click on <strong>Update &gt; Next &gt; Complete</strong> </p>
+</li>
+<li>
+<p>Subsequently, <strong>confirm</strong> in the Tasks on vManage that the configurations are pushed to DC1-vEdge1</p>
+</li>
+</ul>
+<h2 id="step-6-validate-vpn-10-config-on-dc">Step 6: Validate VPN 10 config on DC</h2>
+<p>In this step we will confirm that DC1-vEdge has been provisioned for VPN #10 (as executed in the previous step).  There are multiple ways to access the configuration of vEdge, such as:</p>
+<ul>
+<li><strong>Direct SSH</strong> to Management IP address (VPN 512) of the vEdges</li>
+<li>Initiate <strong>SSH</strong> to vEdges from the <strong>vManage GUI</strong></li>
+<li>Access the Running configuration of vEdges within vManage GUI by clicking on <strong>Configuration &gt; Devices &gt; Click on three dots on the right</strong> (next to the name) of vEdge and click <strong>Running Configuration</strong> from the drop-down menu</li>
+</ul>
+<p>Below, we will use direct SSH mechanism to verify the configurtions:</p>
+<ul>
+<li>
+<p>You can launch SSH to vEdge in DC1 by using <strong>MPutty</strong> client on the Remote Desktop: </p>
+<ul>
+<li><strong>SSH</strong> to OOB Management IP address of <strong>DC1-VEDGE</strong>:  <code>198.18.134.100</code></li>
+<li>Use credentials of <code>admin</code> and <code>admin</code> for  authentication</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">If <code>admin/admin</code> credentials do not work then you may try using <code>cisco/cisco</code> or <code>cisco1/cisco1</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>On the SSH connection to vEdge, <strong>execute</strong> the below commands:</p>
+</li>
+</ul>
+<pre><code>show run vpn 10
+ping vpn 10 198.18.128.1 
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">you can enter Control-C (Ctrl-C) to stop the ping</td>
+</tr>
+</tbody>
+</table>
+<p>These commands <strong>verify</strong> that:</p>
+<ul>
+<li>VPN 10 has been successfully configured by vManage,</li>
+<li>vEdge has connectivity to local device (on the LAN of vEdge) in VPN 10 by initiating a ping to a host on LAN </li>
+</ul>
+<p>Below screenshot shows the output of above command:</p>
+<p><img alt="" src="../pics/t5-dc-showrun-vpn10-ping.png" /></p>
+<p>This successfully adds VPN 10 to DC</p>
+<h2 id="step-7-add-vpn-20-and-30-on-all-vedges-dc1-branch1-branch2">Step 7: Add VPN 20 and 30 on all vEdges (DC1, Branch1 &amp; Branch2)</h2>
+<ul>
+<li>Follow the same steps as mention above and apply following configs to the CLI Templates for respective vEdges and verify the routes:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>vEdge</strong></th>
+<th><strong>Configs</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DC1-vEdge</strong></td>
+<td><strong>vpn 20</strong><br/> interface loopback20<br/> ip address 10.20.100.1/32 <br/> no shutdown<br/>!<br/><strong>vpn 30</strong><br/> interface loopback30<br/> ip address 10.30.100.1/32 <br/> no shutdown</td>
+</tr>
+<tr>
+<td><strong>BR1-vEdge</strong></td>
+<td><strong>vpn 20</strong><br/> interface loopback20<br/> ip address 10.20.1.1/32 <br/> no shutdown<br/>!<br/><strong>vpn 30</strong><br/> interface loopback30<br/> ip address 10.30.1.1/32 <br/> no shutdown</td>
+</tr>
+<tr>
+<td><strong>BR2-vEdge</strong></td>
+<td><strong>vpn 20</strong><br/> interface loopback20<br/> ip address 10.20.2.1/32 <br/> no shutdown<br/>!<br/><strong>vpn 30</strong><br/> interface loopback30<br/> ip address 10.30.2.1/32 <br/> no shutdown</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">Important Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Be very careful in making configuration changes on vEdge.  <strong>Do NOT change</strong> any <strong>configuration</strong> of VPN 512 as it can result in loss of connectivity to the vEdge - which can not be restored.   You will have to start the lab again from Task #1 if you loose network connectivity to a vEdge.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>You have now completed this task of adding VPNs on the SD-WAN Fabric</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Task6-OSPF_service/" class="btn btn-neutral float-right" title="Lab Task 6 - OSPF Peering">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Task4-Full-Mesh/" class="btn btn-neutral" title="Lab Task 4 - Verify Full Mesh Connectivity"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Task4-Full-Mesh/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Task6-OSPF_service/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
